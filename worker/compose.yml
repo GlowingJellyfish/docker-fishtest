@@ -1,6 +1,6 @@
 services:
   fishtest-worker:
-    restart: no
+    restart: always
     build:
       dockerfile: ./Dockerfile
     stop_grace_period: 1m30s

@@ -15,6 +15,10 @@ to increase the rate limit.
 
 ## Worker
 
+The worker uses an archlinux:latest base image and runs pacman updates in the background to
+keep the software stack up to date.
+This is useful to get the latest compilers and tools for running the worker.
+
 ```
 cd worker
 cp .env.example .env

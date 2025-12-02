@@ -1,19 +1,26 @@
-FROM ubuntu:24.04
+FROM archlinux:latest
 
-RUN apt update && apt upgrade -y && apt install -y \
-  git vim python3 make g++ \
-  curl wget
+# base system + tools
+RUN pacman -Syu --noconfirm && \
+  pacman-key --init && \
+  pacman-key --populate archlinux && \
+  pacman -S --noconfirm \
+  git vim python make gcc curl wget clang llvm
 
-# for clang builds, install: clang llvm
+# updater stays as root
+COPY updater.sh /updater.sh
+RUN chmod +x /updater.sh
 
+# make worker user
 RUN useradd --create-home --shell /bin/bash worker
-
 WORKDIR /home/worker
+
 COPY run_workers.sh .
 RUN chmod +x run_workers.sh
 
 USER worker
-ENV NUM_WORKERS ${NUM_WORKERS}
-ENV WORKER_CONFIG $WORKER_CONFIG
+ENV NUM_WORKERS=${NUM_WORKERS}
+ENV WORKER_CONFIG=${WORKER_CONFIG}
 
-CMD ["./run_workers.sh"]
+# run updater in background and then start your workers
+CMD ["/bin/bash", "-c", "/updater.sh & exec ./run_workers.sh"]
