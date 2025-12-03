@@ -8,6 +8,7 @@ services:
     image: fishtest-worker
     stdin_open: true # docker run -i
     tty: true        # docker run -t
+    shm_size: '1gb'  # for shared network
     environment:
       - NUM_WORKERS
       - WORKER_ARGS
