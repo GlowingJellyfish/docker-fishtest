@@ -1,5 +1,6 @@
 #!/bin/bash
 
+su - worker -c "NUM_WORKERS=\"$NUM_WORKERS\" WORKER_ARGS=\"$WORKER_ARGS\" bash -s" <<EOF
 git clone \
   https://github.com/official-stockfish/fishtest \
   ~/fishtest
@@ -13,13 +14,13 @@ cleanup_workers() {
 trap 'cleanup_workers' SIGTERM
 trap 'cleanup_workers' SIGINT
 
-
-for worker in $(seq 1 $NUM_WORKERS); do
-  worker_dir=~/worker$worker
-  cp -r fishtest "$worker_dir"
-  cd "$worker_dir/worker"
-  python3 worker.py $WORKER_ARGS &
+for worker in \$(seq 1 \$NUM_WORKERS); do
+  worker_dir=~/worker\$worker
+  cp -r fishtest "\$worker_dir"
+  cd "\$worker_dir/worker"
+  python3 worker.py \$WORKER_ARGS &
   cd ~
 done
 
 wait
+EOF

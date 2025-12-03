@@ -18,7 +18,7 @@ WORKDIR /home/worker
 COPY run_workers.sh .
 RUN chmod +x run_workers.sh
 
-USER worker
+
 ENV NUM_WORKERS=${NUM_WORKERS}
 ENV WORKER_CONFIG=${WORKER_CONFIG}
 
