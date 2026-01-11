@@ -8,6 +8,7 @@ services:
       - ./fishtest:/app/fishtest
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - ./fishtest.conf:/etc/nginx/sites-available/fishtest.conf:ro
+      - ./.netrc:/root/.netrc
     depends_on:
       # - server6543
       # - server6544
@@ -39,8 +40,9 @@ services:
 
     environment:
       - FISHTEST_URL=http://127.0.0.1
-      - FISHTEST_CAPTCHA_SECRET=your-secret-key-here # dev usage only
-      - FISHTEST_NN_URL=http://127.0.0.1
+      - FISHTEST_CAPTCHA_SECRET= # dev usage only
+      - FISHTEST_NN_URL=https://tests.stockfishchess.org/
+
     depends_on:
       - mongodb
     networks:
