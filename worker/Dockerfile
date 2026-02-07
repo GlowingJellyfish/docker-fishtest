@@ -1,14 +1,14 @@
 FROM archlinux:latest
 
 # base system + tools
-RUN pacman -Syu --noconfirm && \
-  pacman-key --init && \
+RUN pacman-key --init && \
   pacman-key --populate archlinux && \
-  pacman -S --noconfirm \
-  git vim python make gcc curl wget clang llvm
+  pacman -Sy --noconfirm archlinux-keyring && \
+  pacman -Syu --noconfirm && \
+  pacman -S --noconfirm git vim python make gcc curl wget clang llvm
 
 # install gosu for signals
-ENV GOSU_VERSION 1.19
+ENV GOSU_VERSION=1.19
 
 RUN curl -Lo /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-amd64" && \
   chmod +x /usr/local/bin/gosu
