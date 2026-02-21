@@ -63,6 +63,12 @@ jobs:
             git clone --depth 1 https://github.com/official-stockfish/fishtest server/fishtest
           fi
 
+      - name: Ensure server/.netrc exists for image build
+        run: |
+          if [ ! -f server/.netrc ]; then
+            cp server/.netrc.example server/.netrc
+          fi
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
