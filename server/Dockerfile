@@ -10,8 +10,8 @@ ENV APP_DIR=/app/fishtest
 
 ENV PATH="/home/$USERNAME/.local/bin:$PATH"
 
-RUN groupadd --gid $USER_GID $USERNAME \
-    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME
+RUN if ! getent group "$USER_GID" >/dev/null; then groupadd --gid "$USER_GID" "$USERNAME"; fi \
+    && if ! id -u "$USERNAME" >/dev/null 2>&1; then useradd --uid "$USER_UID" --gid "$USER_GID" -m "$USERNAME"; fi
 
 RUN apt-get update && apt-get install -y \
     build-essential \
