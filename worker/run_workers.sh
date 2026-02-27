@@ -13,7 +13,7 @@ trap 'cleanup_workers' SIGINT
 cd /home/worker
 
 git clone \
-  https://github.com/official-stockfish/fishtest \
+  https://github.com/glowingjellyfish/fishtest \
   /home/worker/fishtest
 
 for worker in $(seq 1 $NUM_WORKERS); do
