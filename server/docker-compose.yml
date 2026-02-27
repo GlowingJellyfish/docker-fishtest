@@ -41,7 +41,7 @@ services:
     environment:
       - FISHTEST_URL=http://127.0.0.1
       - FISHTEST_CAPTCHA_SECRET= # dev usage only
-      - FISHTEST_NN_URL=https://tests.stockfishchess.org/
+      - FISHTEST_NN_URL=https://tests.???.org/
 
     depends_on:
       - mongodb
