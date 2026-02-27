@@ -25,7 +25,7 @@ To start a dev server, run:
 
 ```
 cd server
-git clone https://github.com/official-stockfish/fishtest
+git clone https://github.com/glowingjellyfish/fishtest
 docker compose up -d
 ```
 
