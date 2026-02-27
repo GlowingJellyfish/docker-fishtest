@@ -60,7 +60,7 @@ jobs:
       - name: Clone fishtest app source
         run: |
           if [ ! -d server/fishtest ]; then
-            git clone --depth 1 https://github.com/official-stockfish/fishtest server/fishtest
+            git clone --depth 1 https://github.com/glowingjellyfish/fishtest server/fishtest
           fi
 
       - name: Ensure server/.netrc exists for image build
