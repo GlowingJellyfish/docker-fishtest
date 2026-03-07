@@ -34,7 +34,7 @@ jobs:
 
       - name: Extract Docker metadata (worker)
         id: worker-meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@v6
         with:
           images: ${{ env.REGISTRY }}/${{ github.repository_owner }}/docker-fishtest-worker
           tags: |
@@ -81,7 +81,7 @@ jobs:
 
       - name: Extract Docker metadata (server)
         id: server-meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@v6
         with:
           images: ${{ env.REGISTRY }}/${{ github.repository_owner }}/docker-fishtest-server
           tags: |
